@@ -88,4 +88,57 @@ public class UsuarioDAO {
 		}
 		return status;
 	}
+
+	public static int salvarUsuario(Usuario u) {
+		int status = 0;
+		try {
+			Connection con = getConnection();
+			PreparedStatement ps = (PreparedStatement) con
+					.prepareStatement("INSERT INTO usuario (nome, password, email, sexo, pais) values (?,?,?,?,?)");
+			ps.setString(1, u.getNome());
+			ps.setString(2, u.getPassword());
+			ps.setString(3, u.getEmail());
+			ps.setString(4, u.getSexo());
+			ps.setString(5, u.getPais());
+			status = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return status;
+	}
+
+	public static int deleteUsuario(Usuario u) {
+		int status = 0;
+		try {
+			Connection con = getConnection();
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("DELETE FROM usuario WHERE id=?");
+			ps.setInt(1, u.getId());
+			status = ps.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return status;
+	}
+	public static List<Usuario>  getRecords(int start, int total){
+		List<Usuario> list= new ArrayList<Usuario>();
+		try {
+			Connection con = getConnection();
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM LIMIT "+(start)+","+total);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Usuario usuario = new Usuario();
+				usuario.setId(rs.getInt("id"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setPassword(rs.getString("password"));
+				usuario.setEmail(rs.getString("email"));
+				usuario.setSexo(rs.getString("sexo"));
+				usuario.setPais(rs.getString("pais"));
+				list.add(usuario);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return list;
+	}
 }
