@@ -1,5 +1,3 @@
-
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -18,9 +16,11 @@
 			<th>id</th>
 			<th>Nome</th>
 			<th>email</th>
-			<th>senha</th>
-			<th>sexo</th>
-			<th>pais</th>
+			<th>Senha</th>
+			<th>Sexo</th>
+			<th>Pais</th>
+			<th>Editar</th>
+			<th>Excluir</th>
 		</tr>
 		<c:forEach items="${list}" var="usuario">
 			<tr>
@@ -30,8 +30,11 @@
 				<td>${usuario.getPassword() }</td>
 				<td>${usuario.getSexo() }</td>
 				<td>${usuario.getPais() }</td>
+				<td><a href="editform.jsp?id=${usuario.getId()}"> Editar</a></td>
+				<td><a href="#">Excluir</a></td>
 			</tr>
 		</c:forEach>
 	</table>
+	<a href="#">Add </a>
 </body>
 </html>
