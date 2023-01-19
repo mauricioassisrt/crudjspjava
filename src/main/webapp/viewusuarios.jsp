@@ -35,6 +35,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="#">Add </a>
+	<a href="addusuarioform.jsp">Add </a>
 </body>
 </html>
